@@ -1,0 +1,167 @@
+<html lang="en">
+  <!DOCTYPE html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // sync execution ==> synchronous means one task at a time, js will execute a single task then only it will move to the next task. it is also called as blocking code as js engine has to wait for the remaining lines of code to execute.
+
+      //   console.log("start");
+      //   for (let i = 0; i < 10000; i++) {
+      //     console.log(i);
+      //   }
+      //   console.log("middle");
+      //   console.log("end");
+
+      // =====================================================================================
+
+      //! async execution ==> async means task will be executed at last after all the sync statements, once the call stack is empty. event loop will only push the callback or promises only when call stack is empty
+
+      // microtask queue has higher priority than callback queue
+
+      //   setTimeout(() => {
+      //     console.log("inside setTimeout");
+      //   }, 1000); // 3
+
+      //   console.log("Start"); // 1
+
+      //   for (let i = 0; i < 20000; i++) {
+      //     console.log(""); // 2
+      //   }
+
+      //! async example 2
+
+      //   setTimeout(() => {
+      //     for (let i = 0; i < 2000; i++) {
+      //       console.log("");
+      //     }
+      //   }, 3000);
+      //   console.log("Start");
+
+      //! async example 3
+
+      //   console.log(1);
+
+      //   setTimeout(() => {
+      //     console.log(2);
+      //   });
+
+      //   setTimeout(() => {
+      //     console.log(3);
+      //   });
+
+      //   console.log(4);
+
+      //============================
+
+      //   setTimeout(() => {
+      //     console.log("timeout1");
+      //   });
+
+      //   for (let i = 0; i < 20000; i++) {
+      //     console.log("");
+      //   }
+
+      //   console.log("Start");
+
+      // ====================================================
+      // promise
+
+      // let promise = fetch("https://jsonplaceholder.typicode.com/posts");
+      // //   console.log(promise);
+      // promise
+      //   .then((value) => {
+      //     //   console.log(value);
+      //     let jsonData = value.json();
+      //     //   console.log(jsonData);
+      //     jsonData
+      //       .then((data) => {
+      //         console.log(data);
+      //       })
+      //       .catch((err) => {
+      //         console.log(err);
+      //       });
+      //     console.log("inside then");
+      //   })
+      //   .catch((err) => {
+      //     console.log(err);
+      //     console.log("inside catch");
+      //   });
+
+      // let promise = new Promise((resolve, reject) => {
+      //   let a = 11;
+      //   if (a == 11) {
+      //     resolve("Promise resolved");
+      //   } else {
+      //     reject("rejected");
+      //   }
+      // });
+
+      // // console.log(promise);
+
+      // promise
+      //   .then((data) => {
+      //     console.log(data);
+      //   })
+      //   .catch((err) => {
+      //     console.log(err);
+      //   });
+
+      // =================================================
+
+      // console.log("Start");
+
+      // setTimeout(() => {
+      //   console.log("inside setTimeout");
+      // });
+
+      // Promise.resolve().then(() => {
+      //   console.log("Promise");
+      // });
+
+      // console.log("end");
+      //! =================================================
+
+      // let output = fetch("https://jsonplaceholder.typicode.com/posts");
+      // // console.log(output);
+      // output
+      //   .then((data) => {
+      //     // console.log(data); // response object
+      //     let jsonPromise = data.json(); // returns a promise
+      //     console.log(jsonPromise);
+      //     jsonPromise
+      //       .then((value) => {
+      //         console.log(value);
+      //       })
+      //       .catch((err) => {
+      //         console.log(err);
+      //       });
+      //     console.log("Promise is resolved");
+      //   })
+      //   .catch((err) => {
+      //     console.log(err);
+      //     console.log("promise is rejected");
+      //   });
+
+      // ===============async and await==================================================
+      //? async is used to in function declaration and await is inside the function body
+      // async function always returns a promise
+      // await will suspend the execution of the function until the promise is resolved
+      async function getTodos() {
+        let output = await fetch("https://jsonplaceholder.typicode.com/posts");
+        console.log(output);
+        let jsonData = await output.json();
+        console.log(jsonData);
+        // return 123;
+      }
+      // getTodos();
+      // let result = getTodos();
+      // console.log(result);
+
+      // ===============async and await==================================================
+    </script>
+  </body>
+</html>
