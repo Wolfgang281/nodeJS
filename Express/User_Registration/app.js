@@ -3,6 +3,8 @@ import { createReadStream } from "fs";
 import mongodb from "mongodb";
 //! always write import statement at the top of the file
 
+//? MVC --> (model views and controller) architecture
+
 async function connectDB() {
   //! define connection
   let client = await mongodb.MongoClient.connect("mongodb://localhost:27017");
@@ -18,6 +20,7 @@ async function connectDB() {
 let app = express();
 
 app.use(express.urlencoded({ extended: true })); //? middleware it parses/read the incoming html form data
+//? :TODO:using http module
 
 //! home page
 app.get("/", (req, res) => {
