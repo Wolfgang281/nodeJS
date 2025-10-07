@@ -1,16 +1,16 @@
 import { createReadStream } from "fs";
-import { connectDB } from "./db.js";
+import { connectDB } from "../config/db.js";
 
-export function displayHomePage(req, res) {
+export let dHP = (req, res) => {
   res.send(`<h6>Home Page</h6>`);
-}
+};
 
-export function displayFormPage(req, res) {
+export let dFP = (req, res) => {
   let formContents = createReadStream("./form.html", "utf-8");
   formContents.pipe(res);
-}
+};
 
-export async function submitForm(req, res) {
+export let submitForm = async (req, res) => {
   console.log("user data: " + req.body);
   let { userEmail, userPassword } = req.body;
   console.log(req.body); //! whatever data user is submitting, it stores inside req.body which is an object.
@@ -23,11 +23,11 @@ export async function submitForm(req, res) {
   let op = await myCollection.insertOne({ userEmail, userPassword });
 
   res.json({ success: true, message: "user registered successfully", op });
-}
+};
 
-export async function getAllUSers(req, res) {
+export let allUSers = async (req, res) => {
   let myCollection = await connectDB();
   let users = await myCollection.find().toArray();
   let nameArr = users.map((user) => user.userEmail);
   res.json({ success: true, message: "users fetched", nameArr });
-}
+};
