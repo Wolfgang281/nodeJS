@@ -1,8 +1,18 @@
 //~  npm i express mongoose dotenv
-
 import express from "express";
+import connectDB from "./config/database.js";
+
+import userRoutes from "./routers/user.routes.js";
+
+connectDB();
 
 const app = express();
+
+app.use(express.urlencoded({ extended: true }));
+// app.use(express.json());
+//TODO: it is used to parse the html form data
+
+app.use("/api", userRoutes);
 
 app.listen(9000, (err) => {
   if (err) console.log(`Error while starting the server: ${err}`);
@@ -22,3 +32,11 @@ app.listen(9000, (err) => {
 //? ODM(Object Document Mapping) and ORM(Object Relation Mapping)
 
 //~ it is NodeJS library that provides a schema/structure based solution to add models in MONGODB, it also provides various other features like validation and middleware support while giving extra methods to perform CRUD. and making the whole process(interaction with database) a lot easier.
+
+//? users --> name(string), email(string), password(string) (totalBlogs: Number, blogs: []id)
+//? blogs --> title, description (strings), [createdBy: id]
+//? embedded and reference documents
+
+//! postman --> https://www.postman.com/downloads/
+//! thunder-client --> no network required (extension for vscode)
+//? https://marketplace.visualstudio.com/items?itemName=rangav.vscode-thunder-client
