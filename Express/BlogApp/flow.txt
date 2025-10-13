@@ -1,0 +1,32 @@
+step 1) create a new project folder
+
+step 2) create a .json file in the project folder ==> npm init -y/ npm init
+
+step 3) install the required modules
+
+step 4) create a .env file, inside this file define all the sensitive information, which you don't want to display
+
+step 5) create a config folder
+     ==> create a database.js file : define database connection
+
+step 6) create a main file server/app/index.js
+
+step 7) start the server with all configurations with database connected.
+
+step 8) create a models folder
+    ==> define the schema and export it.
+
+step 9) create a controllers folder
+    ==> define the controller file and import the required schema
+    ==> define CRUD
+    ==> export all the functions
+
+step 10) create a router folder
+    ==> create a router file
+    ==> destructure Router, invoke it and export
+    ==> above the export statement, define all the endpoints
+
+step 11) go to the main file(server.js) and import the router file manually and use it in
+middleware with static path/ api versioning provided.
+
+step 12) repeat 8, 9, 10 and 11 for different models.

@@ -1,36 +1,32 @@
-//! in every models file, follow these three steps
-//~ 1) import mongoose
-//~ 2) define a structure/schema [by creating an object of Schema class in mongoose]
-//~ 3) create a model/collection of that schema --> with the hep of model()
-//~ 4) export that model
+//!  repeat these 4 steps for every model file
 
-//? 1)
-// import mongoose from "mongoose";
-import { Schema, model } from "mongoose";
+//~ 1) import mongoose module
+//~ 2) define a schema by creating object of Schema class
+//~ 3) create a model/collection of the schema with the help of model()
+//~ 4) export the model/collection
 
-//? 2)
-let userSchema = new Schema(
+//! 1)
+import mongoose from "mongoose";
+
+//! 2) define schema
+let userSchema = new mongoose.Schema(
   {
-    name: {
-      type: String,
-    },
+    name: { type: String, required: true, lowercase: true, trim: true },
+    password: { type: String, required: true },
     email: {
       type: String,
-    },
-    password: {
-      type: String,
+      required: true,
+      lowercase: true,
+      trim: true,
+      unique: true,
     },
   },
-  {
-    //TODO: insert first doc
-    timestamps: true,
-  }
+  { timestamps: true }
 );
 
-//? 3)
-let userModel = model("User", userSchema); //! name should be passed as singular and should follow camel casing (users)
-//! model("name of the collection", schema) -> it will convert the schema into a collection/model
-//? name of the collection --> users (plural + lowercase)
+//! 3) create a collection/model
+let userModel = mongoose.model("User", userSchema);
+//? users (lowercase + plural)
 
-//? 4)
+//! 4) EXPORT
 export default userModel;

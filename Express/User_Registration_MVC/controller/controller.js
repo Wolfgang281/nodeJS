@@ -31,3 +31,4 @@ export let allUSers = async (req, res) => {
   let nameArr = users.map((user) => user.userEmail);
   res.json({ success: true, message: "users fetched", nameArr });
 };
+
