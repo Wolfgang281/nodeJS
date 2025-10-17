@@ -3,13 +3,26 @@
 //! 3) export it
 
 import { Router } from "express";
-import { addUser, getUser, getUsers } from "../controllers/user.controller.js";
+import {
+  addUser,
+  deleteUser,
+  getUser,
+  getUsers,
+  updateUser,
+} from "../controllers/user.controller.js";
 
 let router = Router();
 
 router.post("/add", addUser);
 router.get("/all", getUsers);
 
-router.get("/one/:id", getUser); //? ":xyz" ==> params (parameters)
+router.delete("/:id", deleteUser);
+//? localhost:9000/api/delete/123
+
+router.patch("/:id", updateUser);
+//? localhost:9000/api/update/123
+
+router.get("/:id", getUser); //? ":xyz" ==> params (parameters)
+//? localhost:9000/api/one/123 --> :id dynamic routes (greedy routes)
 
 export default router;

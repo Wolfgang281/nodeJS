@@ -6,7 +6,7 @@ step 3) install the required modules
 
 step 4) create a .env file, inside this file define all the sensitive information, which you don't want to display
 
-step 5) create a config folder
+step 5) create a config/db folder
      ==> create a database.js file : define database connection
 
 step 6) create a main file server/app/index.js
