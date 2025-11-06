@@ -1,11 +1,19 @@
-import userModel from "../models/user.model.js";
 import expressAsyncHandler from "express-async-handler";
-import { generateJWT } from "../utils/jwt.util.js";
+import userModel from "../models/user.model.js";
 
 export const addUser = async (req, res, next) => {
   try {
     const { email, password, name } = req.body;
-    let newUser = await userModel.create({ email, password, name });
+    /* //! generate a salt (random string)
+    let salt = await bcryptjs.genSalt(10);//
+    //! generate hashed Password
+    let hashedPassword = await bcryptjs.hash(password, salt);
+    //! save the hashed password in db */
+    let newUser = await userModel.create({
+      email,
+      password /* : hashedPassword, */,
+      name,
+    });
     res
       .status(201)
       .json({ success: true, message: "User added successfully", newUser });
@@ -43,7 +51,6 @@ export const getUser = async (req, res) => {
 
 export const updateUser = async (req, res) => {
   let userId = req.params.id;
-  console.log("update controller");
 
   // let existingUser = await userModel.findById(userId);
 
@@ -91,12 +98,26 @@ export const deleteUser = async (req, res) => {
 
 export const login = expressAsyncHandler(async (req, res, next) => {
   const { email, password } = req.body;
-  let user = await userModel.findOne({ email, password });
-  if (!user)
-    return res.status(404).json({ success: false, message: "no user found" });
+  //~ verify the email
+  let existingUser = await userModel.findOne({ email }); //? object
+  if (!existingUser) {
+    return res.status(401).json({
+      success: false,
+      message: "Email not found",
+    });
+  }
 
-  let token = generateJWT(user._id);
-  console.log(token);
-
-  res.status(200).json({ success: true, message: "user found", user, token });
+  //~ compare the password
+  let isMatch = await existingUser.comparePassword(password);
+  console.log(isMatch);
+  if (!isMatch) {
+    return res.status(401).json({
+      success: false,
+      message: "Wrong Password",
+    });
+  }
+  res.status(200).json({
+    success: true,
+    message: "User logged in successfully",
+  });
 });
