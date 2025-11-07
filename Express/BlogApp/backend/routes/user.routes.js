@@ -9,6 +9,7 @@ import {
   getUser,
   getUsers,
   login,
+  logout,
   updateUser,
 } from "../controllers/user.controller.js";
 
@@ -19,6 +20,8 @@ router.get("/all", getUsers);
 
 //! for login
 router.post("/login", login);
+//~ for logout
+router.post("/logout", logout);
 
 router.delete("/:id", deleteUser);
 //? localhost:9000/api/delete/123

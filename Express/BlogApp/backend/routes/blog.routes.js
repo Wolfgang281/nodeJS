@@ -6,10 +6,11 @@ import {
   getBlogs,
   updateBlog,
 } from "../controllers/blog.controller.js";
+import { authentication } from "../middlewares/auth.middleware.js";
 
 const router = Router();
 
-router.post("/add", addBlog);
+router.post("/add", authentication, addBlog);
 router.get("/all", getBlogs);
 
 router.get("/one/:id", getBlog);

@@ -30,9 +30,12 @@ let userSchema = new mongoose.Schema(
 //~ it will run before saving or creating the document
 userSchema.pre("save", async function (next) {
   //! if()
-  let salt = await bcryptjs.genSalt(10); //? salt generation
+  let salt = await bcryptjs.genSalt(10); //? salt generation --> 16 bytes
+  //! $2b$10$Zkb9RYJhIVDIHOf..an44e
+  //? $2b ==> algo finder
+  console.log(salt);
   //? req.body ==> object {email:"", password:"abc", phoneNo:""}
-  let hashedPassword = await bcryptjs.hash(this.password, salt); //~ this will point to req.body
+  let hashedPassword = await bcryptjs.hash(this.password, 10); //~ this will point to req.body
   this.password = hashedPassword;
   next();
 });

@@ -1,5 +1,6 @@
 import expressAsyncHandler from "express-async-handler";
 import userModel from "../models/user.model.js";
+import { generateToken } from "../utils/jwt.util.js";
 
 export const addUser = async (req, res, next) => {
   try {
@@ -107,6 +108,8 @@ export const login = expressAsyncHandler(async (req, res, next) => {
     });
   }
 
+  //! let isMatch2 = await bcrypt.compare(password, existingUser.password);
+
   //~ compare the password
   let isMatch = await existingUser.comparePassword(password);
   console.log(isMatch);
@@ -116,8 +119,33 @@ export const login = expressAsyncHandler(async (req, res, next) => {
       message: "Wrong Password",
     });
   }
-  res.status(200).json({
-    success: true,
-    message: "User logged in successfully",
-  });
+
+  let token = generateToken(existingUser._id);
+  console.log(token);
+
+  //~ cookie("tokenName, value, {options})
+  //? {maxAge: in milliseconds, httpOnly: true}
+  /*  res.cookie("token", token, {
+    maxAge: 1 * 60 * 60 * 1000, //! pass expiration time in milliseconds (1hr)
+    httpOnly: true, //~ can only be accessed by server not by browser
+  }); */
+
+  res
+    .cookie("token", token, {
+      maxAge: 1 * 60 * 60 * 1000, //! pass expiration time in milliseconds (1hr)
+      httpOnly: true, //~ can only be accessed by server not by browser
+    })
+    .status(200)
+    .json({
+      success: true,
+      message: "User logged in successfully",
+    });
+});
+
+export const logout = expressAsyncHandler(async (req, res, next) => {
+  // res.clearCookie("token", "", { maxAge: 0 });
+  res.clearCookie("token");
+  res
+    .status(200)
+    .json({ success: true, message: "User logged out successfully" });
 });
