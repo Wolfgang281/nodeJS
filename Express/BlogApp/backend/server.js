@@ -1,3 +1,11 @@
+import dotenv from "dotenv";
+dotenv.config(); //? this config() will parse all the .env file variables and load them into process.env
+
+// const dotenv = require("dotenv");
+// dotenv.config();
+
+console.log(process.env);
+
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import express from "express";
@@ -31,9 +39,9 @@ app.use("/api/blogs", blogRoutes);
 
 app.use(errorMiddleware); //! use the error middleware in the last after declaring all the routes
 
-app.listen(9000, (err) => {
+app.listen(process.env.PORT, (err) => {
   if (err) console.log(err);
-  console.log("server running");
+  console.log("server running at", process.env.PORT);
 });
 
 //! cookie-parser --> used to manage cookies, import the module and simply use it in the middleware

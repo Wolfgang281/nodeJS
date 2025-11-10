@@ -1,5 +1,6 @@
 import expressAsyncHandler from "express-async-handler";
 import userModel from "../models/user.model.js";
+import CustomError from "../utils/CustomError.js";
 import { generateToken } from "../utils/jwt.util.js";
 
 export const addUser = async (req, res, next) => {
@@ -114,10 +115,10 @@ export const login = expressAsyncHandler(async (req, res, next) => {
   let isMatch = await existingUser.comparePassword(password);
   console.log(isMatch);
   if (!isMatch) {
-    return res.status(401).json({
-      success: false,
-      message: "Wrong Password",
-    });
+    // throw new CustomError("Password did not match", 401); //? implicit calling of error middleware
+
+    //! explicit
+    next(new CustomError("Password did not match", 401));
   }
 
   let token = generateToken(existingUser._id);

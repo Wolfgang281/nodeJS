@@ -10,7 +10,7 @@ import { authentication } from "../middlewares/auth.middleware.js";
 
 const router = Router();
 
-router.post("/add", authentication, addBlog);
+router.post("/add", authentication, addBlog); //? injecting a middleware
 router.get("/all", getBlogs);
 
 router.get("/one/:id", getBlog);
