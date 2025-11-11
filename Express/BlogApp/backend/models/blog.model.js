@@ -13,7 +13,11 @@ let blogSchema = new mongoose.Schema(
       required: true,
       minlength: [10, "at-least 10 characters are required"],
     },
-    createdBy: {},
+    createdBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User", //TODO:
+      required: true,
+    },
   },
   { timestamps: true }
 );

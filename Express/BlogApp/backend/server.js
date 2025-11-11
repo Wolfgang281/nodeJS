@@ -4,7 +4,7 @@ dotenv.config(); //? this config() will parse all the .env file variables and lo
 // const dotenv = require("dotenv");
 // dotenv.config();
 
-console.log(process.env);
+// console.log(process.env);
 
 import cookieParser from "cookie-parser";
 import cors from "cors";

@@ -1,10 +1,15 @@
 import blogModel from "../models/blog.model.js";
 import { asyncHandler } from "../utils/catchAsync.util.js";
+import CustomError from "../utils/CustomError.js";
 
 export const addBlog = asyncHandler(async (req, res) => {
   // try {
   const { title, description } = req.body;
-  let newBlog = await blogModel.create({ title, description });
+  let newBlog = await blogModel.create({
+    title,
+    description,
+    createdBy: req.myUser._id,
+  });
   res.status(201).json({
     success: true,
     message: "blog added",
@@ -45,13 +50,34 @@ export const getBlogs = async (req, res, next) => {
 };
 export const getBlog = async (req, res) => {
   let blogId = req.params.id;
-  let blog = await blogModel.findById(blogId);
+  let blog = await blogModel.findById(blogId).populate({
+    path: "createdBy",
+    select: "name email -_id",
+  });
+  //? populate() --> it is used to populate/fill the data of the referenced document in the current document
+  //? path --> which field of the current document you want to populate
+  //? select --> which fields of the referenced document you want to show
   if (!blog)
     return res.status(404).json({ success: false, message: "blog not found" });
   res.status(200).json({ success: true, message: "blog found", blog });
 };
 
-export const updateBlog = async (req, res) => {};
+export const updateBlog = async (req, res, next) => {
+  let updatedBlog = await blogModel.findOneAndUpdate(
+    { _id: req.params.id, createdBy: req.myUser._id },
+    req.body,
+    {
+      new: true,
+    }
+  );
+
+  if (!updatedBlog) next(new CustomError("Blog not found", 404));
+
+  res
+    .status(200)
+    .json({ success: true, message: "Blog updated successfully", updateBlog });
+};
+
 export const deleteBlog = async (req, res) => {};
 
 //! express-async-handler --> function wrapper only works for async functions and after using this no need to write try-catch block because error object will be passed on to global error middleware automatically

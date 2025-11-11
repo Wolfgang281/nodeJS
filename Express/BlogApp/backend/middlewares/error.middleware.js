@@ -17,6 +17,12 @@ export const errorMiddleware = (err, req, res, next) => {
     statusCode = 400;
     message = "Invalid id";
   }
+
+  if (err.name === "JsonWebTokenError") {
+    statusCode = 401;
+    message = "Invalid Session, Please login again";
+  }
+
   res.status(statusCode).json({ success: false, message, errObj: err });
 };
 

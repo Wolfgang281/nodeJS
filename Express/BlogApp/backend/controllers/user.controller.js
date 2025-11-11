@@ -119,6 +119,9 @@ export const login = expressAsyncHandler(async (req, res, next) => {
 
     //! explicit
     next(new CustomError("Password did not match", 401));
+    // return res
+    //   .status(401)
+    //   .json({ success: false, message: "Password did not match" });
   }
 
   let token = generateToken(existingUser._id);
