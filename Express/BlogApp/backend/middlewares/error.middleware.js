@@ -5,17 +5,17 @@ export const errorMiddleware = (err, req, res, next) => {
 
   if (err.name === "ValidationError") {
     statusCode = 400;
-    message = err.message;
+    message = `${Object.values(err.errors).map((ele) => ele.message)}`;
   }
 
   if (err.code === 11000) {
     statusCode = 409;
-    message = "something already used";
+    message = `${Object.keys(err.keyValue)[0]} already used`;
   }
 
   if (err.name === "CastError") {
     statusCode = 400;
-    message = "Invalid id";
+    message = "Invalid MongoDB ID";
   }
 
   if (err.name === "JsonWebTokenError") {

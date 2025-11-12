@@ -2,9 +2,22 @@ import expressAsyncHandler from "express-async-handler";
 import userModel from "../models/user.model.js";
 import CustomError from "../utils/CustomError.js";
 import { generateToken } from "../utils/jwt.util.js";
+import { registerSchema } from "../validators/user.validator.js";
 
 export const addUser = async (req, res, next) => {
   try {
+    let { error, value } = registerSchema.validate(req.body, {
+      abortEarly: false,
+    });
+    if (error) {
+      next(
+        new CustomError(
+          `${error.details.map((ele) => ele.message).join(", ")}`,
+          400
+        )
+      );
+    }
+
     const { email, password, name } = req.body;
     /* //! generate a salt (random string)
     let salt = await bcryptjs.genSalt(10);//
@@ -99,6 +112,19 @@ export const deleteUser = async (req, res) => {
 };
 
 export const login = expressAsyncHandler(async (req, res, next) => {
+  let { error, value } = registerSchema.validate(req.body, {
+    abortEarly: false,
+  });
+  //? abortEarly: false will return all the errors
+  if (error) {
+    next(
+      new CustomError(
+        `${error.details.map((ele) => ele.message).join(", ")}`,
+        400
+      )
+    );
+  }
+
   const { email, password } = req.body;
   //~ verify the email
   let existingUser = await userModel.findOne({ email }); //? object
@@ -113,7 +139,7 @@ export const login = expressAsyncHandler(async (req, res, next) => {
 
   //~ compare the password
   let isMatch = await existingUser.comparePassword(password);
-  console.log(isMatch);
+
   if (!isMatch) {
     // throw new CustomError("Password did not match", 401); //? implicit calling of error middleware
 
@@ -125,7 +151,6 @@ export const login = expressAsyncHandler(async (req, res, next) => {
   }
 
   let token = generateToken(existingUser._id);
-  console.log(token);
 
   //~ cookie("tokenName, value, {options})
   //? {maxAge: in milliseconds, httpOnly: true}
