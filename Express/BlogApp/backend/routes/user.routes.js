@@ -10,23 +10,43 @@ import {
   getUsers,
   login,
   logout,
-  updateUser,
+  updatePassword,
+  updateProfile,
 } from "../controllers/user.controller.js";
+import { validate } from "../middlewares/validation.middleware.js";
+import {
+  loginSchema,
+  registerSchema,
+  updatePasswordSchema,
+  updateProfileSchema,
+} from "../validators/user.validator.js";
 
 let router = Router();
 
-router.post("/add", addUser);
+router.post("/add", validate(registerSchema), addUser);
 router.get("/all", getUsers);
 
 //! for login
-router.post("/login", login);
+router.post("/login", validate(loginSchema), login);
 //~ for logout
 router.post("/logout", logout);
 
 router.delete("/:id", deleteUser);
 //? localhost:9000/api/delete/123
 
-router.patch("/:id", updateUser);
+//~ for password update
+router.patch(
+  "/update-password/:id",
+  validate(updatePasswordSchema),
+  updatePassword
+);
+router.patch(
+  "/update-profile/:id",
+  validate(updateProfileSchema),
+  updateProfile
+);
+
+// router.patch("/:id", updateUser);
 //? localhost:9000/api/update/123
 
 router.get("/:id", getUser); //? ":xyz" ==> params (parameters)

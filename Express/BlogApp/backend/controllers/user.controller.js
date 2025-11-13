@@ -2,28 +2,19 @@ import expressAsyncHandler from "express-async-handler";
 import userModel from "../models/user.model.js";
 import CustomError from "../utils/CustomError.js";
 import { generateToken } from "../utils/jwt.util.js";
-import { registerSchema } from "../validators/user.validator.js";
 
 export const addUser = async (req, res, next) => {
   try {
-    let { error, value } = registerSchema.validate(req.body, {
-      abortEarly: false,
-    });
-    if (error) {
-      next(
-        new CustomError(
-          `${error.details.map((ele) => ele.message).join(", ")}`,
-          400
-        )
-      );
-    }
-
     const { email, password, name } = req.body;
     /* //! generate a salt (random string)
     let salt = await bcryptjs.genSalt(10);//
     //! generate hashed Password
     let hashedPassword = await bcryptjs.hash(password, salt);
     //! save the hashed password in db */
+
+    // let newUser = new userModel({ email, password, name });
+    // await newUser.save();
+
     let newUser = await userModel.create({
       email,
       password /* : hashedPassword, */,
@@ -64,38 +55,44 @@ export const getUser = async (req, res) => {
   }
 };
 
-export const updateUser = async (req, res) => {
-  let userId = req.params.id;
+// export const updateUser = async (req, res) => {
+//   // ? let updatedData = {
+//   // ?  name: req.body.name,
+//   // ?  email: req.body.email,
+//   // ?  password: req.body.password,
+//   // ? };
+//   // ? let user = await userModel.updateOne({ _id: userId }, { $set: updatedData });
+//   // */
+//   // let user = await userModel.updateOne(
+//   //   { _id: userId }, //? filter
+//   //   {
+//   //     //? update
+//   //     $set: req.body,
+//   //   }
+//   // );
 
-  // let existingUser = await userModel.findById(userId);
+//   //! find
+//   // let updatedUser = await userModel.findByIdAndUpdate(userId, req.body, {
+//   //   new: true, //~ this will return the updated document
+//   // });
+//   // if (!updatedUser)
+//   //   return res.status(404).json({ success: false, message: "user not found" });
+//   // res.status(200).json({ success: true, message: "updated", updatedUser });
+//   // //! findByIdAndUpdate() will find the document first, if not found it will not do anything else document will be updated
 
-  // if (!existingUser)
-  //   return res.status(404).json({ success: false, message: "no user found" });
-  // /*
-  // ? let updatedData = {
-  // ?  name: req.body.name,
-  // ?  email: req.body.email,
-  // ?  password: req.body.password,
-  // ? };
-  // ? let user = await userModel.updateOne({ _id: userId }, { $set: updatedData });
-  // */
-  // let user = await userModel.updateOne(
-  //   { _id: userId }, //? filter
-  //   {
-  //     //? update
-  //     $set: req.body,
-  //   }
-  // );
+//   let userId = req.params.id;
+//   let existingUser = await userModel.findById(userId);
 
-  //! find
-  let updatedUser = await userModel.findByIdAndUpdate(userId, req.body, {
-    new: true, //~ this will return the updated document
-  });
-  if (!updatedUser)
-    return res.status(404).json({ success: false, message: "user not found" });
-  res.status(200).json({ success: true, message: "updated", updatedUser });
-  //! findByIdAndUpdate() will find the document first, if not found it will not do anything else document will be updated
-};
+//   if (!existingUser)
+//     return res.status(404).json({ success: false, message: "no user found" });
+
+//   existingUser.name = req.body.name || existingUser.name;
+//   existingUser.email = req.body.email || existingUser.email;
+//   existingUser.password = req.body.password || existingUser.password;
+
+//   await existingUser.save();
+//   res.status(200).json({ success: true, message: "updated", existingUser });
+// };
 
 export const deleteUser = async (req, res) => {
   let userId = req.params.id;
@@ -112,19 +109,6 @@ export const deleteUser = async (req, res) => {
 };
 
 export const login = expressAsyncHandler(async (req, res, next) => {
-  let { error, value } = registerSchema.validate(req.body, {
-    abortEarly: false,
-  });
-  //? abortEarly: false will return all the errors
-  if (error) {
-    next(
-      new CustomError(
-        `${error.details.map((ele) => ele.message).join(", ")}`,
-        400
-      )
-    );
-  }
-
   const { email, password } = req.body;
   //~ verify the email
   let existingUser = await userModel.findOne({ email }); //? object
@@ -177,4 +161,32 @@ export const logout = expressAsyncHandler(async (req, res, next) => {
   res
     .status(200)
     .json({ success: true, message: "User logged out successfully" });
+});
+
+export const updatePassword = expressAsyncHandler(async (req, res, next) => {
+  let userID = req.params.id;
+  let existingUser = await userModel.findById(userID);
+  if (!existingUser) next(new CustomError("User not found", 404));
+
+  existingUser.password = req.body.password;
+
+  await existingUser.save();
+  res
+    .status(200)
+    .json({ success: true, message: "password updated", existingUser });
+});
+
+export const updateProfile = expressAsyncHandler(async (req, res, next) => {
+  let userID = req.params.id;
+
+  let updatedUser = await userModel.findByIdAndUpdate(userID, req.body, {
+    new: true,
+    runValidators: true,
+  });
+
+  if (!updatedUser) next(new CustomError("User not found", 404));
+
+  res
+    .status(200)
+    .json({ success: true, message: "profile updated", updatedUser });
 });

@@ -57,3 +57,9 @@ let error = {
   },
 };
 console.log(Object.keys(error.keyValue)[0]);
+
+let emp = {
+  name: "abc",
+};
+
+emp.name = "def";
