@@ -164,7 +164,7 @@ export const logout = expressAsyncHandler(async (req, res, next) => {
 });
 
 export const updatePassword = expressAsyncHandler(async (req, res, next) => {
-  let userID = req.params.id;
+  let userID = req.myUser._id;
   let existingUser = await userModel.findById(userID);
   if (!existingUser) next(new CustomError("User not found", 404));
 
