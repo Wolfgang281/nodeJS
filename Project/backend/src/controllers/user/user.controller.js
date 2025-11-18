@@ -2,6 +2,7 @@ import expressAsyncHandler from "express-async-handler";
 import UserModel from "../../models/user.model.js";
 import ApiResponse from "../../utils/ApiResponse.util.js";
 import CustomError from "../../utils/CustomError.util.js";
+import { generateToken } from "../../utils/jwt.util.js";
 
 export const registerUser = expressAsyncHandler(async (req, res, next) => {
   const { username, email, password, contactNumber } = req.body;
@@ -30,17 +31,48 @@ export const loginUser = expressAsyncHandler(async (req, res, next) => {
     // throw new CustomError(401, "Password Not Matched");
     next(new CustomError(401, "Password Not Matched"));
   }
-
-  new ApiResponse("200", "User Logged In Successfully").send(res);
+  //! is isVerified is set to true
+  let token = generateToken(existingUser._id);
+  res.cookie("token", token, {
+    maxAge: process.env.JWT_TOKEN_EXPIRY * 60 * 60 * 1000,
+    httpOnly: true,
+  });
+  new ApiResponse(200, "User Logged In Successfully").send(res);
 });
 
-export const logoutUser = expressAsyncHandler(async (req, res, next) => {});
+export const logoutUser = expressAsyncHandler(async (req, res, next) => {
+  res.clearCookie("token");
+  new ApiResponse(200, "User Logged Out Successfully").send(res);
+});
 
-export const currentUser = expressAsyncHandler(async (req, res, next) => {});
+//~ this is for frontend --> check the success, if true means logged in, else not logged in then redirect client to login page or home page
+export const currentUser = expressAsyncHandler(async (req, res, next) => {
+  new ApiResponse(200, "User is Logged in").send(res);
+});
 
-export const updateProfile = expressAsyncHandler(async (req, res, next) => {});
+export const updateProfile = expressAsyncHandler(async (req, res, next) => {
+  //! excluding password, update rest
+  const updatedUser = await UserModel.findByIdAndUpdate(
+    req.myUser._id,
+    req.body,
+    {
+      new: true, //? it returns the updated document,
+      runValidators: true, //? validate the updated document against the schema
+    }
+  );
 
-export const changePassword = expressAsyncHandler(async (req, res, next) => {});
+  if (!updatedUser) next(new CustomError(404, "User Not Found"));
+  new ApiResponse(200, "User Updated Successfully", updatedUser).send(res);
+});
+
+export const changePassword = expressAsyncHandler(async (req, res, next) => {
+  const existingUser = await UserModel.findById(req.myUser._id);
+
+  existingUser.password = req.body.password;
+  await existingUser.save();
+
+  new ApiResponse(200, "Password Updated Successfully").send(res);
+});
 
 export const forgotPassword = expressAsyncHandler(async (req, res, next) => {});
 

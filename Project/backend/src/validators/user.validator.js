@@ -10,3 +10,22 @@ export const registerSchema = Joi.object({
     .pattern(/^[6-9]\d{9}$/)
     .message("Invalid Mobile Number"),
 });
+
+export const loginSchema = Joi.object({
+  email: Joi.string().min(5).max(50).required().email(),
+  password: Joi.string().min(5).max(50).required(),
+});
+
+export const updateProfileSchema = Joi.object({
+  username: Joi.string().min(5).max(50).optional(),
+  email: Joi.string().min(5).max(50).optional().email(),
+  contactNumber: Joi.string()
+    .length(10)
+    .optional()
+    .pattern(/^[6-9]\d{9}$/)
+    .message("Invalid Mobile Number"),
+});
+
+export const updatePasswordSchema = Joi.object({
+  password: Joi.string().min(5).max(50).required(),
+});

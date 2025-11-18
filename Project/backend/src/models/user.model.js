@@ -38,16 +38,15 @@ const userSchema = new mongoose.Schema(
 );
 
 userSchema.pre("save", async function (next) {
-  // if (!this.isModified("password")) return next();
-  //TODO:
-  //? this if block will only execute when the modified field is not password
+  if (!this.isModified("password")) return next();
+  //? this function will only execute when the modified field is  password
   let salt = await bcrypt.genSalt(10);
   this.password = await bcrypt.hash(this.password, salt);
   next();
 });
 
 userSchema.methods.comparePassword = async function (enteredPassword) {
-  return await bcrypt.compare(this.password, enteredPassword);
+  return await bcrypt.compare(enteredPassword, this.password);
 };
 
 const UserModel = mongoose.model("User", userSchema);
