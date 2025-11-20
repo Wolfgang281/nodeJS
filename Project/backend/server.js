@@ -18,3 +18,6 @@ connectDB()
   });
 
 //? npm i express mongoose dotenv express-async-handler multer bcryptjs cloudinary cors morgan jsonwebtoken cookie-parser nodemailer twilio joi
+
+//! after enabling 2 factor authentication
+// ? 1) go to google account and search for app passwords

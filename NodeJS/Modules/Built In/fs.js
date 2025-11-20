@@ -2,7 +2,7 @@
 // let/const variableName = require("name of the module") "fs, path, os, etc..." ==> CJS
 // import variableName from "path of the module" ==> ESM
 
-let fs = require('fs');
+let fs = require("fs");
 // ! fs --> file system. it provides utilities to interact with files and folders present in the OS (operating system)
 // interaction ==> CRUD (create, read, update, delete)
 
@@ -199,7 +199,7 @@ printName("abc"); // argument */
 //! 7) ============ renaming a folder/file
 
 //! ============= asynchronous execution using fs (promise --> then/catch) =====================
-let fsPromise = require('fs').promises;
+let fsPromise = require("fs").promises;
 // let fsPromise = require('fs/promises');
 // import fsP from "fs/promises"
 
@@ -299,8 +299,8 @@ getTodos2(); */
 //? method name ==> writeFile()
 
 async function createFile() {
-  await fsPromise.writeFile('./demo.txt', 'data to be written');
-  console.log('file created');
+  await fsPromise.writeFile("./demo.txt", "data to be written");
+  console.log("file created");
 }
 
 // createFile();
@@ -309,8 +309,8 @@ async function createFile() {
 //? method name ==> readFile()
 
 async function readFile() {
-  let data = await fsPromise.readFile('./demo.txt', 'utf-8');
-  console.log('file read', data);
+  let data = await fsPromise.readFile("./demo.txt", "utf-8");
+  console.log("file read", data);
 }
 // readFile();
 
@@ -321,10 +321,10 @@ async function readFile() {
 
 //~ ques> create this structure ==> "Project/backend/app.js" (outer layer)
 async function createStructure() {
-  await fsPromise.mkdir('./Project');
-  await fsPromise.mkdir('./Project/backend');
-  await fsPromise.writeFile('./Project/backend/app.js', "console.log('hi')");
-  console.log('created');
+  await fsPromise.mkdir("./Project");
+  await fsPromise.mkdir("./Project/backend");
+  await fsPromise.writeFile("./Project/backend/app.js", "console.log('hi')");
+  console.log("created");
 }
 
 // createStructure();
@@ -351,11 +351,11 @@ async function createStructure() {
 //? 4) Transform Stream: it is similar to duplex, but data can be modified.
 
 //~ example for Readable Stream
-// let read = fs.createReadStream('./index.html', 'utf-8');
-// this createReadStream() emits a event --> "data"
-// to execute an event --> on("name of the event", cb)
+// let read = fs.createReadStream("./index.html", "utf-8");
+// //? this createReadStream() emits a event --> "data"
+// //? to execute an event --> on("name of the event", cb)
 // console.log(read);
-// read.on('data', (chunk) => {
+// read.on("data", (chunk) => {
 //   console.log(chunk);
 // });
 //! default chunk size is 64Kb, {higherWaterMark: 100}
@@ -372,8 +372,8 @@ async function createStructure() {
 // });
 
 //~ example for Duplex Stream
-let read = fs.createReadStream('./index.html', 'utf-8'); // read
-let write = fs.createWriteStream('./demo.txt'); // write
+let read = fs.createReadStream("./index.html", "utf-8"); // read
+let write = fs.createWriteStream("./demo.txt"); // write
 //! pipe() ==> source.pipe(destination), pipe() connects source and destination
 read.pipe(write);
-console.log('file written');
+console.log("file written");

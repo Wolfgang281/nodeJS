@@ -14,9 +14,18 @@ export const registerUser = expressAsyncHandler(async (req, res, next) => {
     contactNumber,
   });
 
-  //   res
-  //     .status(201)
-  //     .json({ success: true, message: "User Registered Successfully", newUser });
+  // let newUser = new UserModel({
+  //   username,
+  //   email,
+  //   password,
+  //   contactNumber,
+  // });
+
+  let emailVerificationToken = newUser.generateEmailVerificationToken();
+  console.log(emailVerificationToken);
+  await newUser.save();
+
+  //! send a mail -->
 
   new ApiResponse(201, "User Registered Successfully", newUser).send(res);
 });
