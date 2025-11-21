@@ -1,8 +1,10 @@
+import crypto from "crypto";
 import expressAsyncHandler from "express-async-handler";
 import UserModel from "../../models/user.model.js";
 import ApiResponse from "../../utils/ApiResponse.util.js";
 import CustomError from "../../utils/CustomError.util.js";
 import { generateToken } from "../../utils/jwt.util.js";
+import { sendEmail } from "../../utils/nodemailer.util.js";
 
 export const registerUser = expressAsyncHandler(async (req, res, next) => {
   const { username, email, password, contactNumber } = req.body;
@@ -22,12 +24,40 @@ export const registerUser = expressAsyncHandler(async (req, res, next) => {
   // });
 
   let emailVerificationToken = newUser.generateEmailVerificationToken();
-  console.log(emailVerificationToken);
   await newUser.save();
 
-  //! send a mail -->
+  let verification_url = `http://localhost:5173/api/user/verify-email/${emailVerificationToken}`;
 
+  //! send a mail -->
+  await sendEmail(
+    email,
+    "Email Verification",
+    "Sample Text",
+    `<h1> this is for verification</h1> <a href="${verification_url}">Click Here</a> <h3> ${emailVerificationToken} </h3>`
+  );
   new ApiResponse(201, "User Registered Successfully", newUser).send(res);
+});
+
+export const verifyEmail = expressAsyncHandler(async (req, res, next) => {
+  let { emailToken } = req.params;
+  let hashedEmailToken = crypto
+    .createHash("sha256")
+    .update(emailToken)
+    .digest("hex");
+
+  let user = await UserModel.findOne({
+    emailVerificationToken: hashedEmailToken,
+    emailVerificationTokenExpiry: { $gt: Date.now() },
+  });
+
+  if (!user) next(new CustomError(400, "Token Expired"));
+
+  user.isVerified = true;
+  user.emailVerificationToken = undefined;
+  user.emailVerificationTokenExpiry = undefined;
+  await user.save();
+
+  new ApiResponse(200, "Email Verified Successfully").send(res);
 });
 
 export const loginUser = expressAsyncHandler(async (req, res, next) => {

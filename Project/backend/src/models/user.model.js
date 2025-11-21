@@ -71,6 +71,12 @@ const userSchema = new mongoose.Schema(
   }
 );
 
+// userSchema.methods.generateToken = async function () {
+//   return jwt.verify(this._id, process.env.JWT_SECRET_KEY, {
+//     expiresIn: "1d",
+//   });
+// };
+
 userSchema.pre("save", async function (next) {
   if (!this.isModified("password")) return next();
   //? this function will only execute when the modified field is  password
