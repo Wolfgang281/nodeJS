@@ -2,9 +2,12 @@ import { Router } from "express";
 import {
   changePassword,
   currentUser,
+  forgotPassword,
   loginUser,
   logoutUser,
   registerUser,
+  resendEmailVerificationLink,
+  resetPassword,
   updateProfile,
   verifyEmail,
 } from "../../controllers/user/user.controller.js";
@@ -21,8 +24,7 @@ const router = Router();
 
 router.post("/register", validate(registerSchema), registerUser);
 
-router.get("/verify-email/:emailToken", verifyEmail);
-//? http://localhost:5173/api/user/verify-email/26cb6ddbf799816891ba5c7fc1ed7ff167a0e9534efca532507645d98ad81730
+router.post("/resend-email-link", resendEmailVerificationLink);
 
 router.post("/login", validate(loginSchema), loginUser);
 router.post("/logout", authenticate, logoutUser);
@@ -40,6 +42,13 @@ router.patch(
   authenticate,
   changePassword
 );
+
+router.post("/forgot-password", forgotPassword);
+
+router.get("/verify-email/:emailToken", verifyEmail);
+//? http://localhost:5173/api/user/verify-email/26cb6ddbf799816891ba5c7fc1ed7ff167a0e9534efca532507645d98ad81730
+
+router.get("/reset-password/:resetPasswordToken", resetPassword);
 
 //~ this is for frontend protected routes
 router.get("/current", authenticate, currentUser);

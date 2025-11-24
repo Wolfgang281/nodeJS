@@ -14,6 +14,4 @@ const mailTransport = nodemailer.createTransport({
   },
 });
 
-console.log(process.env.NODEMAILER_PORT);
-
 export default mailTransport;

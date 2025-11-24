@@ -1,6 +1,7 @@
 import mailTransport from "../config/nodemailer.config.js";
 
 export const sendEmail = async (to, subject, text, html) => {
+  console.log(to, "utils");
   const sentMail = await mailTransport.sendMail({
     from: process.env.NODEMAILER_EMAIL,
     to,
