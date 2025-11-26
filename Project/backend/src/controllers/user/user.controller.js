@@ -66,8 +66,10 @@ export const verifyEmail = expressAsyncHandler(async (req, res, next) => {
 
 export const loginUser = expressAsyncHandler(async (req, res, next) => {
   const { email, password } = req.body;
-  let existingUser = await UserModel.findOne({ email });
+  let existingUser = await UserModel.findOne({ email }).select("+password");
+  console.log(existingUser);
   if (!existingUser) next(new CustomError(400, "Email Not Found!!!"));
+  console.log(password);
 
   let matchPassword = await existingUser.comparePassword(password);
   if (!matchPassword) {
@@ -79,7 +81,7 @@ export const loginUser = expressAsyncHandler(async (req, res, next) => {
     next(new CustomError(400, "Email Not Verified"));
 
   //! is isVerified is set to true
-  let token = generateToken(existingUser._id);
+  let token = generateToken(existingUser.id);
   res.cookie("token", token, {
     maxAge: process.env.JWT_TOKEN_EXPIRY * 60 * 60 * 1000,
     httpOnly: true,

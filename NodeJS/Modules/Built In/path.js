@@ -41,7 +41,14 @@ let data = fs.readFileSync(path2, "utf-8");
 //? join() ==> "/", "\"
 
 // let fs = require("fs")
-// let pathOfFile = path.join(__dirname, "..", "..", "..", "JavaScript", "index.html")
+let pathOfFile = path.join(
+  __dirname,
+  "..",
+  "..",
+  "..",
+  "JavaScript",
+  "index.html"
+);
 
 // console.log(pathOfFile)
 
@@ -52,7 +59,6 @@ let data = fs.readFileSync(path2, "utf-8");
 // console.log(path.extname("folder1/folder2/data.txt"));
 // console.log(path.extname(__dirname)); // " "
 // console.log(path.extname(__filename)); // .js
-
 
 //~ basename() ==> returns the last part of the path
 console.log(path.basename("./demo.java"));
@@ -65,7 +71,6 @@ console.log(path.basename(__filename)); // .js
 // console.log(path.parse("folder1/folder2/data.txt"));
 // console.log(path.parse(__dirname)); // " "
 // console.log(path.parse(__filename)); // .js
-
 
 /* 
 C:\Users\ASUS\Desktop\Classes\node_1030\NodeJS\Modules\Built In\path.js
@@ -80,11 +85,10 @@ C:\Users\ASUS\Desktop\Classes\node_1030\NodeJS\Modules\Built In\path.js
  */
 
 let obj = {
-  root: 'C:\\',
-  dir: 'C:\\Users\\ASUS\\Desktop\\Classes\\node_1030\\NodeJS\\Modules\\Built In',
-  base: 'path.js',
-  ext: '.js',
-  name: 'path'
-}
-console.log(path.format(obj))
-
+  root: "C:\\",
+  dir: "C:\\Users\\ASUS\\Desktop\\Classes\\node_1030\\NodeJS\\Modules\\Built In",
+  base: "path.js",
+  ext: ".js",
+  name: "path",
+};
+console.log(path.format(obj));

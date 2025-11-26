@@ -14,8 +14,6 @@ class ApiResponse {
     if (this.data) {
       responseObject.data = this.data;
     }
-
-    console.log(responseObject);
     res.status(this.statusCode).json(responseObject);
   }
 }

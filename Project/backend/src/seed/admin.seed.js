@@ -6,15 +6,14 @@ export const seedAdmin = async () => {
     console.log("Admin Already Exists, skipping seed..");
     return;
   }
-
   let adminDetails = {
     email: process.env.ADMIN_EMAIL,
     password: process.env.ADMIN_PASSWORD,
     username: process.env.ADMIN_USERNAME,
     role: "admin",
     contactNumber: process.env.ADMIN_CONTACT_NUMBER,
+    isVerified: true,
   };
-
   await UserModel.create(adminDetails);
   console.log("Admin Details Added to DB..");
 };
