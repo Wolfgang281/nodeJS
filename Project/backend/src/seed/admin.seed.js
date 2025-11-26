@@ -14,6 +14,6 @@ export const seedAdmin = async () => {
     contactNumber: process.env.ADMIN_CONTACT_NUMBER,
     isVerified: true,
   };
-  await UserModel.create(adminDetails);
+  await new UserModel(adminDetails).save();
   console.log("Admin Details Added to DB..");
 };

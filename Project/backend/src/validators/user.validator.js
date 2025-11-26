@@ -29,3 +29,15 @@ export const updateProfileSchema = Joi.object({
 export const updatePasswordSchema = Joi.object({
   password: Joi.string().min(5).max(50).required(),
 });
+
+export const resendEmailVerificationLinkSchema = Joi.object({
+  email: Joi.string().min(5).max(50).required().email(),
+});
+
+export const forgotPasswordSchema = Joi.object({
+  email: Joi.string().min(5).max(50).required().email(),
+});
+
+export const resetPasswordSchema = Joi.object({
+  password: Joi.string().min(5).max(50).required(),
+});

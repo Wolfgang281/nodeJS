@@ -67,18 +67,17 @@ export const verifyEmail = expressAsyncHandler(async (req, res, next) => {
 export const loginUser = expressAsyncHandler(async (req, res, next) => {
   const { email, password } = req.body;
   let existingUser = await UserModel.findOne({ email }).select("+password");
-  console.log(existingUser);
+
   if (!existingUser) next(new CustomError(400, "Email Not Found!!!"));
-  console.log(password);
 
   let matchPassword = await existingUser.comparePassword(password);
   if (!matchPassword) {
     // throw new CustomError(401, "Password Not Matched");
-    next(new CustomError(401, "Password Not Matched"));
+    return next(new CustomError(401, "Password Not Matched"));
   }
 
   if (!existingUser.isVerified)
-    next(new CustomError(400, "Email Not Verified"));
+    return next(new CustomError(400, "Email Not Verified"));
 
   //! is isVerified is set to true
   let token = generateToken(existingUser.id);
@@ -151,8 +150,6 @@ export const changePassword = expressAsyncHandler(async (req, res, next) => {
 });
 
 export const forgotPassword = expressAsyncHandler(async (req, res, next) => {
-  console.log(req.body);
-
   const { email } = req.body;
   let existingUser = await UserModel.findOne({ email });
   if (!existingUser) next(new CustomError(400, "Email Not Found"));
