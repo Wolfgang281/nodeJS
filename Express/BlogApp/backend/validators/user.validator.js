@@ -3,16 +3,7 @@ import Joi from "joi";
 //! for JOI --> define structure
 export let registerSchema = Joi.object({
   email: Joi.string().email().min(5).max(50).required(),
-  password: Joi.string()
-    .min(5)
-    .max(50)
-    .required()
-    .pattern(
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).+$/
-    )
-    .message(
-      "Password must be strong and include uppercase, lowercase, number, and special character"
-    ),
+  password: Joi.string().min(5).max(50).required(),
   name: Joi.string().min(3).max(50).required(),
 });
 
