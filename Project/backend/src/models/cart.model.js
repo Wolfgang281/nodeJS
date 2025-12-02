@@ -29,13 +29,13 @@ const CartSchema = new mongoose.Schema(
           type: Number,
           required: true,
         },
+        name: {
+          type: String,
+          required: true,
+        },
+        _id: false,
       },
     ],
-
-    subtotal: {
-      type: Number,
-      default: 0,
-    },
 
     expiresAt: {
       type: Date,

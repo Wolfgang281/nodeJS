@@ -1,0 +1,172 @@
+[
+  {
+    "name": "Wireless Headphones X1",
+    "description": "high quality wireless headphones with noise cancellation",
+    "price": 120,
+    "salePrice": 99,
+    "images": [
+      {
+        "url": "https://example.com/img/headphones1.jpg",
+        "asset_id": "asset_001",
+        "public_id": "public_001"
+      }
+    ],
+    "category": "Electronics",
+    "brand": "SoundMax",
+    "stock": 25,
+    "averageReviews": 0
+  },
+  {
+    "name": "4K Ultra HD Monitor 27",
+    "description": "27 inch 4k ultra hd monitor for gaming and productivity",
+    "price": 350,
+    "salePrice": 299,
+    "images": [
+      {
+        "url": "https://example.com/img/monitor1.jpg",
+        "asset_id": "asset_002",
+        "public_id": "public_002"
+      }
+    ],
+    "category": "Electronics",
+    "brand": "ViewPro",
+    "stock": 8,
+    "averageReviews": 0
+  },
+  {
+    "name": "Ergonomic Office Chair Pro",
+    "description": "ergonomic office chair with lumbar support",
+    "price": 220,
+    "salePrice": 189,
+    "images": [
+      {
+        "url": "https://example.com/img/chair1.jpg",
+        "asset_id": "asset_003",
+        "public_id": "public_003"
+      }
+    ],
+    "category": "Furniture",
+    "brand": "ComfortWorks",
+    "stock": 12,
+    "averageReviews": 0
+  },
+  {
+    "name": "Smartwatch S9",
+    "description": "sleek smartwatch with fitness tracking and heart rate monitor",
+    "price": 180,
+    "salePrice": 150,
+    "images": [
+      {
+        "url": "https://example.com/img/smartwatch1.jpg",
+        "asset_id": "asset_004",
+        "public_id": "public_004"
+      }
+    ],
+    "category": "Wearables",
+    "brand": "TechPulse",
+    "stock": 30,
+    "averageReviews": 0
+  },
+  {
+    "name": "Gaming Keyboard RGB Pro",
+    "description": "mechanical gaming keyboard with rgb lighting",
+    "price": 95,
+    "salePrice": 79,
+    "images": [
+      {
+        "url": "https://example.com/img/keyboard1.jpg",
+        "asset_id": "asset_005",
+        "public_id": "public_005"
+      }
+    ],
+    "category": "Gaming",
+    "brand": "KeyMaster",
+    "stock": 15,
+    "averageReviews": 0
+  },
+  {
+    "name": "Air Fryer 5L XL",
+    "description": "large air fryer for healthy oil free cooking",
+    "price": 150,
+    "salePrice": 129,
+    "images": [
+      {
+        "url": "https://example.com/img/airfryer1.jpg",
+        "asset_id": "asset_006",
+        "public_id": "public_006"
+      }
+    ],
+    "category": "Home Appliances",
+    "brand": "KitchenPro",
+    "stock": 20,
+    "averageReviews": 0
+  },
+  {
+    "name": "Bluetooth Portable Speaker Mini",
+    "description": "portable speaker with deep bass and waterproof design",
+    "price": 60,
+    "salePrice": 49,
+    "images": [
+      {
+        "url": "https://example.com/img/speaker1.jpg",
+        "asset_id": "asset_007",
+        "public_id": "public_007"
+      }
+    ],
+    "category": "Electronics",
+    "brand": "BoomBox",
+    "stock": 50,
+    "averageReviews": 0
+  },
+  {
+    "name": "Stainless Steel Water Bottle 1L",
+    "description": "insulated stainless steel bottle keeps drinks cold or hot",
+    "price": 25,
+    "salePrice": 19,
+    "images": [
+      {
+        "url": "https://example.com/img/bottle1.jpg",
+        "asset_id": "asset_08",
+        "public_id": "public_08"
+      }
+    ],
+    "category": "Outdoors",
+    "brand": "HydraPeak",
+    "stock": 40,
+    "averageReviews": 0
+  },
+  {
+    "name": "Running Shoes UltraComfort",
+    "description": "lightweight running shoes with breathable mesh",
+    "price": 80,
+    "salePrice": 65,
+    "images": [
+      {
+        "url": "https://example.com/img/shoes1.jpg",
+        "asset_id": "asset_009",
+        "public_id": "public_009"
+      }
+    ],
+    "category": "Footwear",
+    "brand": "RunMax",
+    "stock": 18,
+    "averageReviews": 0
+  },
+  {
+    "name": "Laptop Backpack ProShield",
+    "description": "durable laptop backpack with water resistant material",
+    "price": 55,
+    "salePrice": 45,
+    "images": [
+      {
+        "url": "https://example.com/img/backpack1.jpg",
+        "asset_id": "asset_010",
+        "public_id": "public_010"
+      }
+    ],
+    "category": "Accessories",
+    "brand": "CarryAll",
+    "stock": 22,
+    "averageReviews": 0
+  }
+]

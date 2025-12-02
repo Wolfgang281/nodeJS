@@ -144,6 +144,7 @@ export const changePassword = expressAsyncHandler(async (req, res, next) => {
   const existingUser = await UserModel.findById(req.myUser._id);
 
   existingUser.password = req.body.password;
+  console.log(existingUser);
   await existingUser.save();
 
   new ApiResponse(200, "Password Updated Successfully").send(res);

@@ -6,7 +6,7 @@ import CustomError from "../utils/CustomError.util.js";
 export const authenticate = expressAsyncHandler(async (req, res, next) => {
   const token = req?.cookies?.token;
   if (!token || token === undefined)
-    next(new CustomError(401, "Please login to access this route"));
+    return next(new CustomError(401, "Please login to access this route"));
 
   const decodedToken = jwt.verify(token, process.env.JWT_SECRET_KEY);
   const user = await UserModel.findById(decodedToken.id);

@@ -1,8 +1,9 @@
 class ApiResponse {
-  constructor(statusCode, message, data) {
+  constructor(statusCode, message, payload, meta) {
     this.statusCode = statusCode;
     this.message = message;
-    this.data = data;
+    this.payload = payload;
+    this.meta = meta;
   }
 
   send(res) {
@@ -11,8 +12,12 @@ class ApiResponse {
       message: this.message,
     };
 
-    if (this.data) {
-      responseObject.data = this.data;
+    if (this.payload) {
+      responseObject.payload = this.payload;
+    }
+
+    if (this.meta) {
+      responseObject.meta = this.meta;
     }
     res.status(this.statusCode).json(responseObject);
   }
@@ -20,4 +25,4 @@ class ApiResponse {
 
 export default ApiResponse;
 
-//? new ApiResponse(201, "message", data).send()
+//? new ApiResponse(201, "message", payload).send()
