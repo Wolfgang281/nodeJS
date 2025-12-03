@@ -36,5 +36,7 @@
 // // mongoimport "C:\Users\ASUS\Desktop\Classes\node_1030\Project\products.json" -d projectEkart -c products --jsonArray
 
 let namesArr = [{ name: "abc" }, { name: "def" }, { name: "ghi" }];
-let idx = namesArr.findIndex((nameObj) => nameObj.name === "def");
+let idx = namesArr.findIndex((obj) => {
+  return obj.name === "def";
+});
 console.log(idx);

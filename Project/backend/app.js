@@ -11,6 +11,7 @@ import { authenticate, authorize } from "./src/middlewares/auth.middleware.js";
 
 import productRoutes from "./src/routes/admin/product.route.js";
 import cartRoutes from "./src/routes/shop/cart.route.js";
+import shopProductRoutes from "./src/routes/shop/product.route.js";
 import userRoutes from "./src/routes/user/user.route.js";
 
 const app = express();
@@ -26,6 +27,7 @@ app.use(express.urlencoded({ extended: true })); //? to handle form data
 app.use("/api/user", userRoutes);
 app.use("/api/admin/product", authenticate, authorize, productRoutes);
 app.use("/api/shop/cart", authenticate, cartRoutes);
+app.use("/api/shop/product", shopProductRoutes);
 
 app.use(errorMiddleware);
 

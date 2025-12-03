@@ -30,9 +30,9 @@ export const addToCart = expressAsyncHandler(async (req, res, next) => {
     existingCart.items.push({
       productId,
       quantity: 1,
-      price: product.price,
-      salePrice: product.salePrice,
-      name: product.name,
+      // price: product.price,
+      // salePrice: product.salePrice,
+      // name: product.name,
     });
   } else {
     existingCart.items[index].quantity += 1;
@@ -52,7 +52,7 @@ export const addToCart = expressAsyncHandler(async (req, res, next) => {
   ).send(res);
 });
 
-//! update quantity, if qty===1 then remove
+//! decrease quantity, if qty===1 then remove
 export const removeFromCart = expressAsyncHandler(async (req, res, next) => {
   const { productId } = req.body;
   const userId = req.myUser._id;
@@ -74,7 +74,7 @@ export const removeFromCart = expressAsyncHandler(async (req, res, next) => {
     return next(new CustomError(404, "Product Not Found in Cart"));
   }
 
-  // if quantity is 1 → remove product entirely
+  // if quantity is 1 --> remove product entirely
   if (existingCart.items[index].quantity === 1) {
     existingCart.items.splice(index, 1);
   } else {
@@ -84,18 +84,61 @@ export const removeFromCart = expressAsyncHandler(async (req, res, next) => {
   await existingCart.save({ validateBeforeSave: false });
 
   // calculate total
-  const totalAmount = existingCart.items.reduce((acc, item) => {
-    return acc + item.quantity * item.salePrice;
-  }, 0);
+  // const totalAmount = existingCart.items.reduce((acc, item) => {
+  //   console.log(item);
+  //   return acc + item.quantity * item.salePrice;
+  // }, 0);
 
   new ApiResponse(
     201,
     "Product Removed Successfully",
-    existingCart.items.length === 0 ? "No Items in Cart" : existingCart,
-    totalAmount.toFixed(2)
+    existingCart.items.length === 0 ? "No Products in Cart" : existingCart.items
+    // totalAmount.toFixed(2)
   ).send(res);
 });
 
-export const clearCart = expressAsyncHandler(async (req, res, next) => {});
+export const clearCart = expressAsyncHandler(async (req, res, next) => {
+  let userId = req.myUser._id;
+  const existingCart = await CartModel.findOne({ userId });
+  if (!existingCart) return next(new CustomError(404, "Cart Not Found"));
 
-export const getCart = expressAsyncHandler(async (req, res, next) => {});
+  existingCart.items = [];
+  await existingCart.save({ validateBeforeSave: false });
+  // this validateBeforeSave will not check for the validation against schema, it will simply save the document
+
+  new ApiResponse(200, "Cart Cleared Successfully").send(res);
+});
+
+export const getCart = expressAsyncHandler(async (req, res, next) => {
+  let userId = req.myUser._id;
+
+  let existingCart = await CartModel.findOne({ userId }).populate({
+    path: "items.productId",
+    select: "name -_id price salePrice images.url brand",
+  });
+
+  // let existingCart = await CartModel.aggregate([
+  //   {
+  //     $lookup:{
+  //       from
+  //     }
+  //   }
+  // ])
+
+  if (!existingCart) return next(new CustomError(404, "Cart Not Found"));
+
+  let flatArray = existingCart.items.map((item) => ({
+    name: item.productId.name,
+    price: item.productId.price,
+    salePrice: item.productId.salePrice,
+    url: item.productId.images.url,
+    brand: item.productId.brand,
+    quantity: item.quantity,
+  }));
+
+  new ApiResponse(
+    200,
+    "Cart Fetched Successfully",
+    flatArray.length === 0 ? "No Products in Cart" : flatArray
+  ).send(res);
+});
