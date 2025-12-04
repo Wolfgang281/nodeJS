@@ -60,10 +60,13 @@ const productSchema = new mongoose.Schema(
     //? comments: {},
     //? slug: {}, SEO
   },
-  { timestamps: true }
+  { timestamps: true, versionKey: false }
 );
 
 //? collection/model
 const ProductModel = mongoose.model("Product", productSchema);
 
 export default ProductModel;
+
+//! insomnia
+//! requestly

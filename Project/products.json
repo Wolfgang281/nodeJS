@@ -1,172 +1,287 @@
 [
   {
-    "name": "Wireless Headphones X1",
-    "description": "high quality wireless headphones with noise cancellation",
-    "price": 120,
-    "salePrice": 99,
+    "name": "wireless bluetooth earbuds",
+    "description": "high quality wireless earbuds with noise cancellation",
+    "price": 2499,
+    "salePrice": 1999,
     "images": [
       {
-        "url": "https://example.com/img/headphones1.jpg",
-        "asset_id": "asset_001",
-        "public_id": "public_001"
+        "url": "https://example.com/earbuds1.jpg",
+        "asset_id": "asset_earbuds1",
+        "public_id": "public_earbuds1"
       }
     ],
-    "category": "Electronics",
-    "brand": "SoundMax",
+    "category": "electronics",
+    "brand": "soundmax",
     "stock": 25,
-    "averageReviews": 0
+    "averageReviews": 0,
+    "createdAt": "2025-01-01T10:15:00.000Z",
+    "updatedAt": "2025-01-01T10:20:00.000Z"
   },
   {
-    "name": "4K Ultra HD Monitor 27",
-    "description": "27 inch 4k ultra hd monitor for gaming and productivity",
-    "price": 350,
+    "name": "gaming mechanical keyboard",
+    "description": "rgb mechanical keyboard with blue switches",
+    "price": 4599,
+    "salePrice": 3999,
+    "images": [
+      {
+        "url": "https://example.com/keyboard1.jpg",
+        "asset_id": "asset_keyboard1",
+        "public_id": "public_keyboard1"
+      }
+    ],
+    "category": "electronics",
+    "brand": "keypro",
+    "stock": 15,
+    "averageReviews": 0,
+    "createdAt": "2025-01-02T12:00:00.000Z",
+    "updatedAt": "2025-01-02T12:05:00.000Z"
+  },
+  {
+    "name": "steel water bottle",
+    "description": "leak proof stainless steel water bottle",
+    "price": 899,
+    "salePrice": 699,
+    "images": [
+      {
+        "url": "https://example.com/bottle1.jpg",
+        "asset_id": "asset_bottle1",
+        "public_id": "public_bottle1"
+      }
+    ],
+    "category": "kitchen",
+    "brand": "hydrosteel",
+    "stock": 40,
+    "averageReviews": 0,
+    "createdAt": "2025-01-03T08:30:00.000Z",
+    "updatedAt": "2025-01-03T08:35:00.000Z"
+  },
+  {
+    "name": "cotton regular fit t-shirt",
+    "description": "comfortable cotton t-shirt for daily wear",
+    "price": 599,
+    "salePrice": 449,
+    "images": [
+      {
+        "url": "https://example.com/tshirt1.jpg",
+        "asset_id": "asset_tshirt1",
+        "public_id": "public_tshirt1"
+      }
+    ],
+    "category": "fashion",
+    "brand": "clothify",
+    "stock": 50,
+    "averageReviews": 0,
+    "createdAt": "2025-01-04T14:10:00.000Z",
+    "updatedAt": "2025-01-04T14:12:00.000Z"
+  },
+  {
+    "name": "leather men's wallet",
+    "description": "premium leather wallet with multiple compartments",
+    "price": 1299,
+    "salePrice": 999,
+    "images": [
+      {
+        "url": "https://example.com/wallet1.jpg",
+        "asset_id": "asset_wallet1",
+        "public_id": "public_wallet1"
+      }
+    ],
+    "category": "fashion",
+    "brand": "urbanhide",
+    "stock": 20,
+    "averageReviews": 0,
+    "createdAt": "2025-01-05T09:00:00.000Z",
+    "updatedAt": "2025-01-05T09:03:00.000Z"
+  },
+  {
+    "name": "smart fitness band",
+    "description": "fitness band with heart rate and sleep tracking",
+    "price": 1999,
+    "salePrice": 1699,
+    "images": [
+      {
+        "url": "https://example.com/fitnessband1.jpg",
+        "asset_id": "asset_fit1",
+        "public_id": "public_fit1"
+      }
+    ],
+    "category": "electronics",
+    "brand": "fitpulse",
+    "stock": 30,
+    "averageReviews": 0,
+    "createdAt": "2025-01-06T11:20:00.000Z",
+    "updatedAt": "2025-01-06T11:22:00.000Z"
+  },
+  {
+    "name": "ceramic coffee mug",
+    "description": "durable ceramic mug with matte finish",
+    "price": 399,
     "salePrice": 299,
     "images": [
       {
-        "url": "https://example.com/img/monitor1.jpg",
-        "asset_id": "asset_002",
-        "public_id": "public_002"
+        "url": "https://example.com/mug1.jpg",
+        "asset_id": "asset_mug1",
+        "public_id": "public_mug1"
       }
     ],
-    "category": "Electronics",
-    "brand": "ViewPro",
-    "stock": 8,
-    "averageReviews": 0
+    "category": "kitchen",
+    "brand": "brewcraft",
+    "stock": 60,
+    "averageReviews": 0,
+    "createdAt": "2025-01-07T07:45:00.000Z",
+    "updatedAt": "2025-01-07T07:47:00.000Z"
   },
   {
-    "name": "Ergonomic Office Chair Pro",
-    "description": "ergonomic office chair with lumbar support",
-    "price": 220,
-    "salePrice": 189,
+    "name": "wireless mouse",
+    "description": "ergonomic wireless mouse with adjustable dpi",
+    "price": 799,
+    "salePrice": 649,
     "images": [
       {
-        "url": "https://example.com/img/chair1.jpg",
-        "asset_id": "asset_003",
-        "public_id": "public_003"
+        "url": "https://example.com/mouse1.jpg",
+        "asset_id": "asset_mouse1",
+        "public_id": "public_mouse1"
       }
     ],
-    "category": "Furniture",
-    "brand": "ComfortWorks",
-    "stock": 12,
-    "averageReviews": 0
+    "category": "electronics",
+    "brand": "clickpro",
+    "stock": 35,
+    "averageReviews": 0,
+    "createdAt": "2025-01-08T13:00:00.000Z",
+    "updatedAt": "2025-01-08T13:05:00.000Z"
   },
   {
-    "name": "Smartwatch S9",
-    "description": "sleek smartwatch with fitness tracking and heart rate monitor",
-    "price": 180,
-    "salePrice": 150,
+    "name": "kids school backpack",
+    "description": "lightweight backpack with multiple pockets",
+    "price": 999,
+    "salePrice": 799,
     "images": [
       {
-        "url": "https://example.com/img/smartwatch1.jpg",
-        "asset_id": "asset_004",
-        "public_id": "public_004"
+        "url": "https://example.com/bag1.jpg",
+        "asset_id": "asset_bag1",
+        "public_id": "public_bag1"
       }
     ],
-    "category": "Wearables",
-    "brand": "TechPulse",
-    "stock": 30,
-    "averageReviews": 0
+    "category": "accessories",
+    "brand": "bagster",
+    "stock": 45,
+    "averageReviews": 0,
+    "createdAt": "2025-01-09T10:15:00.000Z",
+    "updatedAt": "2025-01-09T10:18:00.000Z"
   },
   {
-    "name": "Gaming Keyboard RGB Pro",
-    "description": "mechanical gaming keyboard with rgb lighting",
-    "price": 95,
-    "salePrice": 79,
+    "name": "stainless steel kitchen knife",
+    "description": "sharp and durable kitchen knife for daily use",
+    "price": 499,
+    "salePrice": 349,
     "images": [
       {
-        "url": "https://example.com/img/keyboard1.jpg",
-        "asset_id": "asset_005",
-        "public_id": "public_005"
+        "url": "https://example.com/knife1.jpg",
+        "asset_id": "asset_knife1",
+        "public_id": "public_knife1"
       }
     ],
-    "category": "Gaming",
-    "brand": "KeyMaster",
-    "stock": 15,
-    "averageReviews": 0
+    "category": "kitchen",
+    "brand": "chefline",
+    "stock": 55,
+    "averageReviews": 0,
+    "createdAt": "2025-01-10T16:40:00.000Z",
+    "updatedAt": "2025-01-10T16:43:00.000Z"
   },
   {
-    "name": "Air Fryer 5L XL",
-    "description": "large air fryer for healthy oil free cooking",
-    "price": 150,
-    "salePrice": 129,
+    "name": "men running shoes",
+    "description": "lightweight and comfortable running shoes",
+    "price": 2499,
+    "salePrice": 2199,
     "images": [
       {
-        "url": "https://example.com/img/airfryer1.jpg",
-        "asset_id": "asset_006",
-        "public_id": "public_006"
+        "url": "https://example.com/shoes1.jpg",
+        "asset_id": "asset_shoes1",
+        "public_id": "public_shoes1"
       }
     ],
-    "category": "Home Appliances",
-    "brand": "KitchenPro",
-    "stock": 20,
-    "averageReviews": 0
+    "category": "fashion",
+    "brand": "runmax",
+    "stock": 28,
+    "averageReviews": 0,
+    "createdAt": "2025-01-11T09:30:00.000Z",
+    "updatedAt": "2025-01-11T09:33:00.000Z"
   },
   {
-    "name": "Bluetooth Portable Speaker Mini",
-    "description": "portable speaker with deep bass and waterproof design",
-    "price": 60,
-    "salePrice": 49,
+    "name": "portable power bank",
+    "description": "10000mah power bank with fast charging",
+    "price": 1499,
+    "salePrice": 1299,
     "images": [
       {
-        "url": "https://example.com/img/speaker1.jpg",
-        "asset_id": "asset_007",
-        "public_id": "public_007"
+        "url": "https://example.com/powerbank1.jpg",
+        "asset_id": "asset_pb1",
+        "public_id": "public_pb1"
       }
     ],
-    "category": "Electronics",
-    "brand": "BoomBox",
+    "category": "electronics",
+    "brand": "chargepro",
     "stock": 50,
-    "averageReviews": 0
+    "averageReviews": 0,
+    "createdAt": "2025-01-12T14:00:00.000Z",
+    "updatedAt": "2025-01-12T14:03:00.000Z"
   },
   {
-    "name": "Stainless Steel Water Bottle 1L",
-    "description": "insulated stainless steel bottle keeps drinks cold or hot",
-    "price": 25,
-    "salePrice": 19,
+    "name": "women hand purse",
+    "description": "stylish hand purse with spacious compartments",
+    "price": 1799,
+    "salePrice": 1499,
     "images": [
       {
-        "url": "https://example.com/img/bottle1.jpg",
-        "asset_id": "asset_08",
-        "public_id": "public_08"
+        "url": "https://example.com/purse1.jpg",
+        "asset_id": "asset_purse1",
+        "public_id": "public_purse1"
       }
     ],
-    "category": "Outdoors",
-    "brand": "HydraPeak",
-    "stock": 40,
-    "averageReviews": 0
+    "category": "fashion",
+    "brand": "stylebag",
+    "stock": 32,
+    "averageReviews": 0,
+    "createdAt": "2025-01-13T12:10:00.000Z",
+    "updatedAt": "2025-01-13T12:13:00.000Z"
   },
   {
-    "name": "Running Shoes UltraComfort",
-    "description": "lightweight running shoes with breathable mesh",
-    "price": 80,
-    "salePrice": 65,
+    "name": "table lamp",
+    "description": "modern table lamp with warm white light",
+    "price": 899,
+    "salePrice": 749,
     "images": [
       {
-        "url": "https://example.com/img/shoes1.jpg",
-        "asset_id": "asset_009",
-        "public_id": "public_009"
+        "url": "https://example.com/lamp1.jpg",
+        "asset_id": "asset_lamp1",
+        "public_id": "public_lamp1"
       }
     ],
-    "category": "Footwear",
-    "brand": "RunMax",
+    "category": "home decor",
+    "brand": "brightlite",
+    "stock": 20,
+    "averageReviews": 0,
+    "createdAt": "2025-01-14T17:20:00.000Z",
+    "updatedAt": "2025-01-14T17:22:00.000Z"
+  },
+  {
+    "name": "laptop cooling pad",
+    "description": "cooling pad with dual fans for laptops",
+    "price": 1299,
+    "salePrice": 1099,
+    "images": [
+      {
+        "url": "https://example.com/coolingpad1.jpg",
+        "asset_id": "asset_cp1",
+        "public_id": "public_cp1"
+      }
+    ],
+    "category": "electronics",
+    "brand": "cooltech",
     "stock": 18,
-    "averageReviews": 0
-  },
-  {
-    "name": "Laptop Backpack ProShield",
-    "description": "durable laptop backpack with water resistant material",
-    "price": 55,
-    "salePrice": 45,
-    "images": [
-      {
-        "url": "https://example.com/img/backpack1.jpg",
-        "asset_id": "asset_010",
-        "public_id": "public_010"
-      }
-    ],
-    "category": "Accessories",
-    "brand": "CarryAll",
-    "stock": 22,
-    "averageReviews": 0
+    "averageReviews": 0,
+    "createdAt": "2025-01-15T08:50:00.000Z",
+    "updatedAt": "2025-01-15T08:53:00.000Z"
   }
 ]
