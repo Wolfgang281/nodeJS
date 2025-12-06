@@ -74,7 +74,7 @@ export const searchProducts = expressAsyncHandler(async (req, res, next) => {
 
 // https://www.amazon.in/s?k=headphones&rh=p_n_feature_two_browse-bin%3A207962822031%257C27344393031%2Cp_123%3A233043&dc&crid=2AY029FVSR2M0&qid=1764742397&rnid=91049095031&sprefix=headphone%2Caps%2C215&ref=sr_nr_p_123_3&ds=v1%3ASHryNqvHFFDenDGu7Qm0lBTDWheWY4476XgruG8sjcQ
 
-let filterObject = {
-  category: { $in: ["electronics"] },
-  price: { $and: [[Object], [Object]] },
-};
+// let filterObject = {
+//   category: { $in: ["electronics"] },
+//   price: { $and: [[Object], [Object]] },
+// };

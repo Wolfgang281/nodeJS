@@ -26,6 +26,7 @@
     "morgan": "^1.10.1",
     "multer": "^2.0.2",
     "nodemailer": "^7.0.10",
+    "paypal-rest-sdk": "^1.8.1",
     "twilio": "^5.10.5"
   }
 }

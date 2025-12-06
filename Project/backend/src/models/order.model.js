@@ -23,7 +23,7 @@ const OrderSchema = new Schema(
           ref: "Product",
           required: true,
         },
-        title: {
+        name: {
           type: String,
           required: true,
           trim: true,
@@ -51,7 +51,7 @@ const OrderSchema = new Schema(
         ref: "Address",
         required: true,
       },
-      address: { type: String, required: true },
+      addressLine: { type: String, required: true },
       city: { type: String, required: true },
       pincode: { type: String, required: true },
       phone: { type: String, required: true },
@@ -87,16 +87,6 @@ const OrderSchema = new Schema(
       type: Number,
       required: true,
       min: 0,
-    },
-
-    orderDate: {
-      type: Date,
-      default: Date.now,
-    },
-
-    orderUpdateDate: {
-      type: Date,
-      default: Date.now,
     },
 
     paymentId: { type: String, default: null },
