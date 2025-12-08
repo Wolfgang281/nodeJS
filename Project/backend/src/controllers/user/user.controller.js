@@ -84,6 +84,8 @@ export const loginUser = expressAsyncHandler(async (req, res, next) => {
   res.cookie("token", token, {
     maxAge: process.env.JWT_TOKEN_EXPIRY * 60 * 60 * 1000,
     httpOnly: true,
+    secure: true,
+    sameSite: "none",
   });
 
   new ApiResponse(200, "User Logged In Successfully").send(res);

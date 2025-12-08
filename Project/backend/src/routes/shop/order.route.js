@@ -11,3 +11,5 @@ router.post("/create", createOrder);
 router.post("/capture", captureOrder);
 
 export default router;
+
+// localhost:9000/api/shop/order/capture
