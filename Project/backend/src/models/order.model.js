@@ -42,6 +42,7 @@ const OrderSchema = new Schema(
           required: true,
           min: 1,
         },
+        _id: false,
       },
     ],
 

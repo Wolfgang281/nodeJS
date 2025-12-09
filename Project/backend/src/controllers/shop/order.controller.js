@@ -126,14 +126,27 @@ export const captureOrder = expressAsyncHandler(async (req, res, next) => {
     paymentId,
     { payer_id: PayerID },
     async (err, resp) => {
-      if (err) console.log(err);
-      // console.log(resp);
+      if (err) return next(new CustomError(500, err.message));
       let order = await OrderModel.findOne({ paymentId });
       if (resp.state === "approved") {
         order.paymentStatus = "Paid";
         order.payerId = PayerID;
         await order.save();
-        new ApiResponse(200, "Payment Captured Successfully", resp).send(res);
+
+        //! 1) subtract the quantity from totalStock
+        for (let item of order.cartItems) {
+          let product = await ProductModel.findById(item.productId);
+          if (!product) return next(new CustomError(404, "Product Not Found"));
+
+          product.stock -= item.quantity;
+          await product.save();
+        }
+        //! 2) after successful capture clear the cart
+        let cart = await CartModel.findById(order.cartId);
+        cart.items = [];
+        await cart.save();
+
+        new ApiResponse(200, "Payment Captured Successfully", order).send(res);
       } else if (resp.state == "Paid") {
         return next(new CustomError(400, "Payment already captured"));
       } else {
@@ -151,9 +164,24 @@ export const captureOrder = expressAsyncHandler(async (req, res, next) => {
   );
 });
 
-export const getOrders = expressAsyncHandler(async (req, res, next) => {});
+export const getOrders = expressAsyncHandler(async (req, res, next) => {
+  const userId = req.myUser._id;
 
-export const getOrder = expressAsyncHandler(async (req, res, next) => {});
+  let order = await OrderModel.find({ userId });
+  if (order.length === 0) return next(new CustomError(404, "Orders Not Found"));
+
+  new ApiResponse(200, "Order fetched successfully", order).send(res);
+});
+
+export const getOrder = expressAsyncHandler(async (req, res, next) => {
+  const orderId = req.params.orderId;
+  const userId = req.myUser._id;
+
+  let order = await OrderModel.findOne({ _id: orderId, userId });
+  if (!order) return next(new CustomError(404, "Order Not Found"));
+
+  new ApiResponse(200, "Order fetched successfully", order).send(res);
+});
 
 //TODO: cancelOrder, refundOrder, returnOrder
 export const cancelOrder = expressAsyncHandler(async (req, res, next) => {});

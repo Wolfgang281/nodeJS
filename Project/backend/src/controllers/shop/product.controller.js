@@ -51,7 +51,15 @@ export const fetchProducts = expressAsyncHandler(async (req, res, next) => {
   new ApiResponse(200, "Products Fetched Successfully", products).send(res);
 });
 
-export const fetchProduct = expressAsyncHandler(async (req, res, next) => {});
+export const fetchProduct = expressAsyncHandler(async (req, res, next) => {
+  const { productId } = req.params;
+
+  let product = await ProductModel.findById(productId);
+
+  if (!product) return next(new CustomError(404, "Product Not Found"));
+
+  new ApiResponse(200, "Product Fetched Successfully", product).send(res);
+});
 
 export const searchProducts = expressAsyncHandler(async (req, res, next) => {
   const keyword = req.query.keyword;

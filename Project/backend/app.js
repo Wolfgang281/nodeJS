@@ -15,6 +15,7 @@ import shopAddressRoutes from "./src/routes/shop/address.route.js";
 import cartRoutes from "./src/routes/shop/cart.route.js";
 import shopOrderRoutes from "./src/routes/shop/order.route.js";
 import shopProductRoutes from "./src/routes/shop/product.route.js";
+import shopReviewRoute from "./src/routes/shop/review.route.js";
 import userRoutes from "./src/routes/user/user.route.js";
 
 const app = express();
@@ -41,6 +42,7 @@ app.use("/api/shop/cart", authenticate, cartRoutes);
 app.use("/api/shop/product", shopProductRoutes);
 app.use("/api/shop/order", authenticate, shopOrderRoutes);
 app.use("/api/shop/address", authenticate, shopAddressRoutes);
+app.use("/api/shop/review", authenticate, shopReviewRoute);
 
 app.use(errorMiddleware);
 
