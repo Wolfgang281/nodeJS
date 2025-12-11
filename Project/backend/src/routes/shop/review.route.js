@@ -9,9 +9,9 @@ import {
 const router = Router();
 
 router.post("/add", addReview);
-router.post("/all", getAllReviews);
+router.get("/all", getAllReviews);
 
-router.patch("/:id", updateReview);
-router.delete("/:id", deleteReview);
+router.patch("/update", updateReview);
+router.delete("/delete", deleteReview);
 
 export default router;
