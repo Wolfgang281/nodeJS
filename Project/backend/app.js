@@ -10,6 +10,7 @@ import { seedAdmin } from "./src/seed/admin.seed.js";
 
 import { authenticate, authorize } from "./src/middlewares/auth.middleware.js";
 
+import orderAdminRoutes from "./src/routes/admin/order.route.js";
 import productRoutes from "./src/routes/admin/product.route.js";
 import shopAddressRoutes from "./src/routes/shop/address.route.js";
 import cartRoutes from "./src/routes/shop/cart.route.js";
@@ -43,6 +44,7 @@ app.use("/api/shop/product", shopProductRoutes);
 app.use("/api/shop/order", authenticate, shopOrderRoutes);
 app.use("/api/shop/address", authenticate, shopAddressRoutes);
 app.use("/api/shop/review", authenticate, shopReviewRoute);
+app.use("/api/admin/orders", authenticate, authorize, orderAdminRoutes);
 
 app.use(errorMiddleware);
 
